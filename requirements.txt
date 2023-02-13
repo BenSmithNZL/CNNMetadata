@@ -1,0 +1,7 @@
+dropbox==11.36.0
+numpy==1.22.3
+pandas==1.4.2
+Pillow==9.4.0
+scikit_learn==1.2.1
+torch==1.13.0
+torchvision==0.14.0
