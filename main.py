@@ -1,6 +1,7 @@
-"""Imports"""
+""" Imports """
 import config
 from dataset import Dataset, DatasetPreparation
+from datetime import datetime
 from evaluate import evaluate_baseline, evaluate_metadata
 import json
 from models import BaselineModel, MetadataModel
@@ -12,18 +13,13 @@ import statistics
 from sklearn import preprocessing
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, confusion_matrix, f1_score, recall_score, precision_score
 import warnings
-from datetime import datetime
 
-
-""" execute dataset and download"""
-dataset_preparation = DatasetPreparation(TOKEN=config.TOKEN, mode=1, num_of_downloads=1)
+""" Retrive dataset and download images """
+dataset_preparation = DatasetPreparation(TOKEN=config.TOKEN, mode=0, num_of_downloads=1)
 dataset_preparation.get_files()
+metadata_df = pd.read_csv(config.FILE_PATH + 'data/metadata/metadata_clean.csv', delimiter=",")
 
-
-metadata_df = pd.read_csv('data/metadata/metadata_clean.csv', delimiter=",")
-
-torch.manual_seed(config.SEED)
-
+""" Get constants """
 NUM_OF_LEVEL_1_NAMES = sum(metadata_df.columns.str.contains(pat='level_1_name'))
 NUM_OF_LEVEL_2_NAMES = sum(metadata_df.columns.str.contains(pat='level_2_name'))
 NUM_OF_GRID_NAMES = sum(metadata_df.columns.str.contains(pat='grid'))
@@ -31,6 +27,7 @@ NUM_OF_GRID_NAMES = sum(metadata_df.columns.str.contains(pat='grid'))
 label_encoder = preprocessing.LabelEncoder()
 metadata_df['label'] = label_encoder.fit_transform(metadata_df['scientific_name'])
 NUM_OF_CLASSES = len(metadata_df['label'].unique())
+class_weights = len(metadata_df) / metadata_df['label'].value_counts().sort_index()
 
 """ Create master """
 master = {
@@ -52,7 +49,6 @@ master = {
                 Dataset(metadata_df, config.TRANSFORM, 2),
                 Dataset(metadata_df, config.TRANSFORM, 3),
                 Dataset(metadata_df, config.TRANSFORM, 4)]
-
 }
 
 raw_results = {
@@ -74,13 +70,15 @@ test_metrics = {
 
 
 """ K fold """
+torch.manual_seed(config.SEED)
+
 splits = KFold(
     n_splits=config.K,
     shuffle=True,
     random_state=config.SEED)
 
 start_time = datetime.now()
-print("###### Cross-validation started at: ", start_time.strftime("%d/%m/%Y %H:%M:%S"), " ######")
+print("\n###### Cross-validation started at: ", start_time.strftime("%d/%m/%Y %H:%M:%S"), " ######")
 
 for fold, (train_index, test_index) in enumerate(splits.split(np.arange(len(metadata_df)))):
 
@@ -95,14 +93,16 @@ for fold, (train_index, test_index) in enumerate(splits.split(np.arange(len(meta
                 master['dataset'][index],
                 train_index,
                 test_index,
-                master['model'][index])
+                master['model'][index],
+                class_weights)
 
         else:
             predicted, true = evaluate_metadata(
                 master['dataset'][index],
                 train_index,
                 test_index,
-                master['model'][index])
+                master['model'][index],
+                class_weights)
 
         raw_results['model_name'].append(model_name)
         raw_results['fold'].append(fold + 1)
@@ -123,9 +123,8 @@ for fold, (train_index, test_index) in enumerate(splits.split(np.arange(len(meta
 end_time = datetime.now()
 print("\n###### Cross-validation finished at: ", end_time.strftime("%d/%m/%Y %H:%M:%S"), " ######")
 
-with open("results/raw_results/raw_results.json", "w") as outfile:
+with open(config.FILE_PATH + "results/raw_results/raw_results.json", "w") as outfile:
     json.dump(raw_results, outfile)
-
 
 """ Summarised results """
 test_metrics = pd.DataFrame(test_metrics)
@@ -160,7 +159,7 @@ for model_name in master['model_name']:
     cm = pd.DataFrame(cm)
     cm.columns = label_encoder.classes_
     cm.index = label_encoder.classes_
-    cm.to_csv("results/confusion_matricies/" + model_name + "_confusion_matrix.csv", index=True)
+    cm.to_csv(config.FILE_PATH + "results/confusion_matricies/" + model_name + "_confusion_matrix.csv", index=True)
 
 
 """ Experiment info """
@@ -185,14 +184,10 @@ experiment_info = {
 
 
 """ Save to disk """
-
-
-raw_results.to_csv("results/raw_results/raw_results.csv", index=False)
-
-test_metrics.to_csv("results/test_metrics.csv", index=False)
-summarised_metrics.to_csv("results/summarised_metrics.csv", index=False)
-
+raw_results.to_csv(config.FILE_PATH + "results/raw_results/raw_results.csv", index=False)
+test_metrics.to_csv(config.FILE_PATH + "results/test_metrics.csv", index=False)
+summarised_metrics.to_csv(config.FILE_PATH + "results/summarised_metrics.csv", index=False)
 experiment_info = pd.DataFrame(experiment_info)
-experiment_info.to_csv("results/experiment_info.csv", index=False)
+experiment_info.to_csv(config.FILE_PATH + "results/experiment_info.csv", index=False)
 
 
