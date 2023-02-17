@@ -12,6 +12,7 @@ LEARNING_RATE = 0.001
 MOMENTUM = 0.9
 NUM_OF_WORKERS = 0
 SEED = 47
+STARTING_FOLD = 3
 TRANSFORM = torchvision.transforms.Compose([
     torchvision.transforms.ToTensor(),
     torchvision.transforms.Resize(416),

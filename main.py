@@ -82,43 +82,46 @@ print("\n###### Cross-validation started at: ", start_time.strftime("%d/%m/%Y %H
 
 for fold, (train_index, test_index) in enumerate(splits.split(np.arange(len(metadata_df)))):
 
-    print(f'\n###### Starting fold {fold + 1} of {config.K} ######')
+    if fold >= (config.STARTING_FOLD - 1):
 
-    for index, model_name in enumerate(master['model_name']):
+        print(f'\n###### Starting fold {fold + 1} of {config.K} ######')
 
-        print(f'### Evaluating {model_name}')
+        for index, model_name in enumerate(master['model_name']):
 
-        if model_name == "baseline_model":
-            predicted, true = evaluate_baseline(
-                master['dataset'][index],
-                train_index,
-                test_index,
-                master['model'][index],
-                class_weights)
+            print(f'### Evaluating {model_name}')
 
-        else:
-            predicted, true = evaluate_metadata(
-                master['dataset'][index],
-                train_index,
-                test_index,
-                master['model'][index],
-                class_weights)
+            if model_name == "baseline_model":
+                predicted, true = evaluate_baseline(
+                    master['dataset'][index],
+                    train_index,
+                    test_index,
+                    master['model'][index],
+                    class_weights)
 
-        raw_results['model_name'].append(model_name)
-        raw_results['fold'].append(fold + 1)
-        raw_results['predicted'].append(predicted)
-        raw_results['true'].append(true)
+            else:
+                predicted, true = evaluate_metadata(
+                    master['dataset'][index],
+                    train_index,
+                    test_index,
+                    master['model'][index],
+                    class_weights)
 
-        test_metrics['model_name'].append(model_name)
-        test_metrics['fold'].append(fold + 1)
-        test_metrics['accuracy'].append(accuracy_score(true, predicted))
+            raw_results['model_name'].append(model_name)
+            raw_results['fold'].append(fold + 1)
+            raw_results['predicted'].append(predicted)
+            raw_results['true'].append(true)
 
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            test_metrics['balanced_accuracy'].append(balanced_accuracy_score(true, predicted))
-            test_metrics['weighted_f1'].append(f1_score(true, predicted, average='weighted', zero_division=0))
-            test_metrics['weighted_precision'].append(precision_score(true, predicted, average='weighted', zero_division=0))
-            test_metrics['weighted_recall'].append(recall_score(true, predicted, average='weighted', zero_division=0))
+            test_metrics['model_name'].append(model_name)
+            test_metrics['fold'].append(fold + 1)
+            test_metrics['accuracy'].append(accuracy_score(true, predicted))
+
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                test_metrics['balanced_accuracy'].append(balanced_accuracy_score(true, predicted))
+                test_metrics['weighted_f1'].append(f1_score(true, predicted, average='weighted', zero_division=0))
+                test_metrics['weighted_precision'].append(precision_score(true, predicted, average='weighted', zero_division=0))
+                test_metrics['weighted_recall'].append(recall_score(true, predicted, average='weighted', zero_division=0))
+
 
 end_time = datetime.now()
 print("\n###### Cross-validation finished at: ", end_time.strftime("%d/%m/%Y %H:%M:%S"), " ######")
@@ -144,6 +147,7 @@ for model_name in master['model_name']:
 
 summarised_metrics.columns = ['model_name', 'metric', 'mean', 'standard_deviations']
 
+
 """ Confusion matricies """
 raw_results = pd.DataFrame(raw_results)
 
@@ -163,7 +167,6 @@ for model_name in master['model_name']:
 
 
 """ Experiment info """
-
 experiment_info = {
     'parameter': [
         'start_datetime',
@@ -171,7 +174,9 @@ experiment_info = {
         'seconds_elapsed',
         'minutes_elapsed',
         'hours_elapsed',
-        'days_elapsed'],
+        'days_elapsed',
+        'num_of_obs',
+        'starting_fold'],
 
     'value': [
         start_time.strftime("%d/%m/%Y %H:%M:%S"),
@@ -179,7 +184,9 @@ experiment_info = {
         (end_time - start_time).total_seconds(),
         (end_time - start_time).total_seconds() / 60,
         (end_time - start_time).total_seconds() / 3600,
-        (end_time - start_time).total_seconds() / 86400]
+        (end_time - start_time).total_seconds() / 86400,
+        len(metadata_df),
+        config.STARTING_FOLD]
 }
 
 
@@ -189,5 +196,3 @@ test_metrics.to_csv(config.FILE_PATH + "results/test_metrics.csv", index=False)
 summarised_metrics.to_csv(config.FILE_PATH + "results/summarised_metrics.csv", index=False)
 experiment_info = pd.DataFrame(experiment_info)
 experiment_info.to_csv(config.FILE_PATH + "results/experiment_info.csv", index=False)
-
-
