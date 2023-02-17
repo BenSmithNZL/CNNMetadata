@@ -1,10 +1,11 @@
-import torch
+import config
+import dropbox
+import numpy as np
+import os
+import pandas as pd
 import PIL
 from sklearn import preprocessing
-import os
-import dropbox
-import pandas as pd
-import numpy as np
+import torch
 import urllib.request
 
 
@@ -42,7 +43,7 @@ class Dataset(torch.utils.data.Dataset):
         if torch.is_tensor(index):
             index = index.tolist()
 
-        image_file_name = ('data/images/' + self.data_frame['file_name'][index])
+        image_file_name = (config.FILE_PATH + 'data/images/' + self.data_frame['file_name'][index])
         image = PIL.Image.open(image_file_name)
         image = self.TRANSFORM(image)
         label = self.data_frame['label'][index]
@@ -56,23 +57,24 @@ class Dataset(torch.utils.data.Dataset):
 
 class DatasetPreparation:
 
-    """ mode 0 is test, 1 is existing with sample downloads, 2 is full download"""
-
     def __init__(self, TOKEN, mode=0, num_of_downloads=None):
 
-        self.existing_filenames = os.listdir('data/images/')
+        self.existing_filenames = os.listdir(config.FILE_PATH + 'data/images/')
 
         if mode == 0:
             print(f"Mode {mode} selected, using metadata_test.csv with no downloads")
 
             self.metadata_df = pd.read_csv(
-                'data/metadata/metadata_test.csv',
+                config.FILE_PATH + 'data/metadata/metadata_test.csv',
                 delimiter=",")
 
         elif mode == 1:
             print(f"Mode {mode} selected, using existing files with some downloads")
 
-            base = pd.read_csv('data/metadata/metadata_base.csv', delimiter=",")
+            base = pd.read_csv(
+                config.FILE_PATH + 'data/metadata/metadata_base.csv',
+                delimiter=",")
+
             ex = base[base['file_name'].apply(lambda x: x in self.existing_filenames)]
 
             self.metadata_df = pd.concat([
@@ -84,31 +86,31 @@ class DatasetPreparation:
             print(f"Mode {mode} selected, doing full download")
 
             self.metadata_df = pd.read_csv(
-                'data/metadata/metadata_base.csv',
+                config.FILE_PATH + 'data/metadata/metadata_base.csv',
                 delimiter=",")
 
-        self.metadata_df.to_csv('data/metadata/metadata_raw.csv', index=False)
+        self.metadata_df.to_csv(config.FILE_PATH + 'data/metadata/metadata_raw.csv', index=False)
         self.dbx = dropbox.Dropbox(TOKEN)
 
     def inaturalist_download(self, url, file_name):
         try:
             print(f"Downloading {file_name}")
-            urllib.request.urlretrieve(url, 'data/images/' + file_name)
+            urllib.request.urlretrieve(url, config.FILE_PATH + 'data/images/' + file_name)
         except:
             print(f"Error downloading {file_name}")
-            if os.path.exists('data/images/' + file_name):
-                os.remove('data/images/' + file_name)
+            if os.path.exists(config.FILE_PATH + 'data/images/' + file_name):
+                os.remove(config.FILE_PATH + 'data/images/' + file_name)
 
     def dropbox_download(self, file_name):
         try:
-            with open('data/images/' + file_name, 'wb') as f:
+            with open(config.FILE_PATH + 'data/images/' + file_name, 'wb') as f:
                 print(f"Downloading {file_name}")
                 _, result = self.dbx.files_download(path='/NZ plant photos/' + file_name)
                 f.write(result.content)
         except:
             print(f"Error downloading {file_name}")
-            if os.path.exists('data/images/' + file_name):
-                os.remove('data/images/' + file_name)
+            if os.path.exists(config.FILE_PATH + 'data/images/' + file_name):
+                os.remove(config.FILE_PATH + 'data/images/' + file_name)
 
     def get_files(self):
 
@@ -135,7 +137,7 @@ class DatasetPreparation:
 
         print("##### \nDownloading complete")
 
-        downloaded_filenames = os.listdir('data/images/')
+        downloaded_filenames = os.listdir(config.FILE_PATH + 'data/images/')
         self.metadata_df = self.metadata_df[self.metadata_df['file_name'].apply(lambda x: x in downloaded_filenames)]
 
         self.metadata_df['normalised_latitude'] = normalise_data(self.metadata_df['decimal_latitude'])
@@ -157,5 +159,5 @@ class DatasetPreparation:
         label_encoder = preprocessing.LabelEncoder()
         self.metadata_df['label'] = label_encoder.fit_transform(self.metadata_df['scientific_name'])
 
-        self.metadata_df.to_csv('data/metadata/metadata_clean.csv', index=False)
+        self.metadata_df.to_csv(config.FILE_PATH + 'data/metadata/metadata_clean.csv', index=False)
 

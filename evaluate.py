@@ -2,7 +2,7 @@ import config
 import torch
 
 
-def evaluate_baseline(dataset, train_index, test_index, network):
+def evaluate_baseline(dataset, train_index, test_index, network, class_weights):
 
     train_loader = torch.utils.data.DataLoader(
         dataset,
@@ -21,7 +21,10 @@ def evaluate_baseline(dataset, train_index, test_index, network):
     model = network
     model = model.to(config.DEVICE)
 
-    criterion = torch.nn.CrossEntropyLoss()
+    class_weights = torch.Tensor(class_weights)
+    class_weights = class_weights.to(config.DEVICE)
+
+    criterion = torch.nn.CrossEntropyLoss(weight=class_weights)
     optimizer = torch.optim.SGD(
         model.parameters(),
         lr=config.LEARNING_RATE,
@@ -58,7 +61,7 @@ def evaluate_baseline(dataset, train_index, test_index, network):
     return(predicted, true)
 
 
-def evaluate_metadata(dataset, train_index, test_index, network):
+def evaluate_metadata(dataset, train_index, test_index, network, class_weights):
 
     train_loader = torch.utils.data.DataLoader(
         dataset,
@@ -77,7 +80,10 @@ def evaluate_metadata(dataset, train_index, test_index, network):
     model = network
     model = model.to(config.DEVICE)
 
-    criterion = torch.nn.CrossEntropyLoss()
+    class_weights = torch.Tensor(class_weights)
+    class_weights = class_weights.to(config.DEVICE)
+
+    criterion = torch.nn.CrossEntropyLoss(weight=class_weights)
     optimizer = torch.optim.SGD(
         model.parameters(),
         lr=config.LEARNING_RATE,
