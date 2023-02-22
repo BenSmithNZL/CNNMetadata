@@ -94,8 +94,11 @@ class DatasetPreparation:
 
     def inaturalist_download(self, url, file_name):
         try:
-            print(f"Downloading {file_name}")
             urllib.request.urlretrieve(url, config.FILE_PATH + 'data/images/' + file_name)
+            image = PIL.Image.open(config.FILE_PATH + 'data/images/' + file_name)
+            image.thumbnail((config.IMAGE_SIZE, config.IMAGE_SIZE))
+            image.save(config.FILE_PATH + 'data/images/' + file_name)
+            print(f"Downloaded {file_name}")
         except:
             print(f"Error downloading {file_name}")
             if os.path.exists(config.FILE_PATH + 'data/images/' + file_name):
@@ -104,9 +107,12 @@ class DatasetPreparation:
     def dropbox_download(self, file_name):
         try:
             with open(config.FILE_PATH + 'data/images/' + file_name, 'wb') as f:
-                print(f"Downloading {file_name}")
                 _, result = self.dbx.files_download(path='/NZ plant photos/' + file_name)
                 f.write(result.content)
+                image = PIL.Image.open(config.FILE_PATH + 'data/images/' + file_name)
+                image.thumbnail((config.IMAGE_SIZE, config.IMAGE_SIZE))
+                image.save(config.FILE_PATH + 'data/images/' + file_name)
+                print(f"Downloaded {file_name}")
         except:
             print(f"Error downloading {file_name}")
             if os.path.exists(config.FILE_PATH + 'data/images/' + file_name):
