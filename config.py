@@ -13,9 +13,9 @@ LEARNING_RATE = 0.001
 MOMENTUM = 0.9
 NUM_OF_WORKERS = 0
 SEED = 47
-STARTING_FOLD = 3
+STARTING_FOLD = 1
 TRANSFORM = torchvision.transforms.Compose([
     torchvision.transforms.ToTensor(),
-    torchvision.transforms.CenterCrop(384),
+    torchvision.transforms.CenterCrop(240),
     torchvision.transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])])
 TOKEN = "dropbox token goes here"
