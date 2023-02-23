@@ -1,21 +1,31 @@
 url,source,scientific_name,file_name,decimal_latitude,decimal_longitude,level_1_name,level_2_name,elevation
-https://inaturalist-open-data.s3.amazonaws.com/photos/14660398/original.jpg,N,Leptospermum scoparium,14660398.jpeg,-43.555264,172.57611,Canterbury,Christchurch,15.097923
-https://inaturalist-open-data.s3.amazonaws.com/photos/103439154/original.jpg,N,Leptospermum scoparium,103439154.jpeg,-35.842385,174.57753,Northland,Whangarei,121.072205
-https://inaturalist-open-data.s3.amazonaws.com/photos/83335887/original.jpeg,N,Leptospermum scoparium,83335887.jpeg,-38.125,177.42778,Bay of Plenty,Opotiki,96.123367
-https://inaturalist-open-data.s3.amazonaws.com/photos/241347216/original.jpg,N,Leptospermum scoparium,241347216.jpeg,-38.988633,177.72151,Hawke's Bay,Wairoa,344.818542
-https://inaturalist-open-data.s3.amazonaws.com/photos/175458873/original.jpg,N,Leptospermum scoparium,175458873.jpeg,-39.063329,174.79282,Taranaki,Stratford,267.098999
-https://inaturalist-open-data.s3.amazonaws.com/photos/28992550/original.jpeg,N,Agathis australis,28992550.jpeg,-36.793461,174.7126,Auckland,Auckland,45.524769
-https://inaturalist-open-data.s3.amazonaws.com/photos/147439884/original.jpeg,N,Agathis australis,147439884.jpeg,-36.161444,175.35634,Auckland,Auckland,63.545033
-https://inaturalist-open-data.s3.amazonaws.com/photos/91366463/original.jpg,N,Agathis australis,91366463.jpeg,-36.791665,174.74365,Auckland,Auckland,26.816641
-https://inaturalist-open-data.s3.amazonaws.com/photos/177642332/original.jpg,N,Agathis australis,177642332.jpeg,-39.080413,174.07576,Taranaki,New Plymouth,44.500019
-https://inaturalist-open-data.s3.amazonaws.com/photos/184777908/original.jpg,N,Agathis australis,184777908.jpeg,-37.303447,174.93222,Waikato,Waikato,100.980347
-https://inaturalist-open-data.s3.amazonaws.com/photos/230372832/original.jpeg,N,Sophora microphylla,230372832.jpeg,-45.880568,167.6362,Southland,Southland,130.212143
-https://inaturalist-open-data.s3.amazonaws.com/photos/1271442/original.,N,Sophora microphylla,1271442.jpeg,-45.845057,170.49982,Otago,Dunedin,155.708679
-https://inaturalist-open-data.s3.amazonaws.com/photos/9062204/original.jpeg,N,Sophora microphylla,9062204.jpeg,-44.588048,169.31982,Otago,Queenstown-Lakes,385.296997
-https://inaturalist-open-data.s3.amazonaws.com/photos/106359339/original.jpeg,N,Sophora microphylla,106359339.jpeg,-43.835022,172.16797,Canterbury,Selwyn,37.467575
-https://inaturalist-open-data.s3.amazonaws.com/photos/70028099/original.jpg,N,Cordyline australis,70028099.jpeg,-43.562634,172.63437,Canterbury,Christchurch,5.410913
-https://inaturalist-open-data.s3.amazonaws.com/photos/170713805/original.jpeg,N,Cordyline australis,170713805.jpeg,-40.309265,175.23029,Manawatu-Wanganui,Manawatu,3.277014
-https://inaturalist-open-data.s3.amazonaws.com/photos/67411818/original.jpeg,N,Cordyline australis,67411818.jpeg,-43.568532,172.63118,Canterbury,Christchurch,20.196299
-https://inaturalist-open-data.s3.amazonaws.com/photos/6094364/original.jpg,N,Cordyline australis,6094364.jpeg,-44.833433,170.5035,Canterbury,Waitaki,340.086639
-https://inaturalist-open-data.s3.amazonaws.com/photos/192046389/original.jpg,N,Cordyline australis,192046389.jpeg,-41.332962,174.791,Wellington,Wellington,2.163701
-https://inaturalist-open-data.s3.amazonaws.com/photos/14943419/original.jpeg,N,Cordyline australis,14943419.jpeg,-40.967036,174.97491,Wellington,Kapiti Coast,9.586086
+https://inaturalist-open-data.s3.amazonaws.com/photos/187840458/small.jpg,N,Coprosma fowerakeri,187840458.jpeg,-44.760338,168.16848754882812,Southland,Southland,1209.592041
+https://inaturalist-open-data.s3.amazonaws.com/photos/186518916/small.jpeg,N,Coprosma fowerakeri,186518916.jpeg,-42.074364,172.66049194335938,Tasman,Tasman,1332.0
+https://inaturalist-open-data.s3.amazonaws.com/photos/172185253/small.jpg,N,Coprosma fowerakeri,172185253.jpeg,-43.29506,171.7445831298828,Canterbury,Selwyn,1004.358826
+https://inaturalist-open-data.s3.amazonaws.com/photos/166496123/small.jpeg,N,Coprosma fowerakeri,166496123.jpeg,-41.99168,172.81259155273438,Marlborough,Marlborough,1269.109253
+https://inaturalist-open-data.s3.amazonaws.com/photos/3141731/small.JPG,N,Coprosma fowerakeri,3141731.jpeg,-42.021656,172.72442626953125,Tasman,Tasman,1472.953613
+https://inaturalist-open-data.s3.amazonaws.com/photos/248050069/small.jpeg,N,Coprosma fowerakeri,248050069.jpeg,-42.89817,171.5460968017578,West Coast,Westland,997.168213
+https://inaturalist-open-data.s3.amazonaws.com/photos/189992675/small.jpeg,N,Coprosma fowerakeri,189992675.jpeg,-42.896038,171.5369110107422,West Coast,Westland,1061.518555
+https://inaturalist-open-data.s3.amazonaws.com/photos/242929978/small.jpeg,N,Coprosma fowerakeri,242929978.jpeg,-42.485775,172.8387908935547,Canterbury,Hurunui,1167.721069
+https://inaturalist-open-data.s3.amazonaws.com/photos/246925289/small.jpeg,N,Coprosma fowerakeri,246925289.jpeg,-42.89576,171.53517150878906,West Coast,Westland,1095.458496
+https://inaturalist-open-data.s3.amazonaws.com/photos/3141733/small.JPG,N,Coprosma fowerakeri,3141733.jpeg,-42.021656,172.72442626953125,Tasman,Tasman,1472.953613
+https://inaturalist-open-data.s3.amazonaws.com/photos/187840444/small.jpg,N,Coprosma fowerakeri,187840444.jpeg,-44.760338,168.16848754882812,Southland,Southland,1209.592041
+https://inaturalist-open-data.s3.amazonaws.com/photos/176097171/small.jpg,N,Coprosma fowerakeri,176097171.jpeg,-41.49184,173.2826385498047,Marlborough,Marlborough,1476.34375
+https://inaturalist-open-data.s3.amazonaws.com/photos/189992664/small.jpeg,N,Coprosma fowerakeri,189992664.jpeg,-42.896038,171.5369110107422,West Coast,Westland,1061.518555
+https://inaturalist-open-data.s3.amazonaws.com/photos/188031951/small.jpg,N,Coprosma fowerakeri,188031951.jpeg,-41.123535,172.85317993164062,Tasman,Tasman,1322.684204
+https://inaturalist-open-data.s3.amazonaws.com/photos/176337026/small.jpg,N,Coprosma fowerakeri,176337026.jpeg,-41.52739,173.19407653808594,Marlborough,Marlborough,1458.098511
+https://inaturalist-open-data.s3.amazonaws.com/photos/168940552/small.jpeg,N,Coprosma fowerakeri,168940552.jpeg,-45.383694,167.59629821777344,Southland,Southland,1283.960449
+https://inaturalist-open-data.s3.amazonaws.com/photos/65564180/small.jpg,N,Coprosma fowerakeri,65564180.jpeg,-41.14387,172.6094512939453,Tasman,Tasman,1436.933838
+https://inaturalist-open-data.s3.amazonaws.com/photos/150575769/small.jpg,N,Coprosma robusta,150575769.jpeg,-37.70479,175.1292266845703,Waikato,Waikato,68.432915
+https://inaturalist-open-data.s3.amazonaws.com/photos/53941806/small.jpeg,N,Coprosma robusta,53941806.jpeg,-36.79269,174.73345947265625,Auckland,Auckland,30.686371
+https://inaturalist-open-data.s3.amazonaws.com/photos/121284455/small.jpeg,N,Coprosma robusta,121284455.jpeg,-36.795086,174.72352600097656,Auckland,Auckland,85.879639
+https://inaturalist-open-data.s3.amazonaws.com/photos/54764476/small.jpeg,N,Coprosma robusta,54764476.jpeg,-43.47831,172.4646453857422,Canterbury,Christchurch,58.382423
+https://inaturalist-open-data.s3.amazonaws.com/photos/173568898/small.jpg,N,Coprosma robusta,173568898.jpeg,-37.678165,175.09193420410156,Waikato,Waikato,67.872261
+https://inaturalist-open-data.s3.amazonaws.com/photos/105852359/small.jpg,N,Coprosma robusta,105852359.jpeg,-36.554863,174.62515258789062,Auckland,Auckland,27.605606
+https://inaturalist-open-data.s3.amazonaws.com/photos/3439801/small.JPG,N,Coprosma robusta,3439801.jpeg,-35.120396,173.8493194580078,Northland,Far North,206.668442
+https://inaturalist-open-data.s3.amazonaws.com/photos/193488076/small.jpeg,N,Coprosma robusta,193488076.jpeg,-40.880157,175.45082092285156,Wellington,Carterton,443.717316
+https://inaturalist-open-data.s3.amazonaws.com/photos/1181176/small.jpg,N,Coprosma robusta,1181176.jpeg,-43.562645,172.60443115234375,Canterbury,Christchurch,10.490654
+https://inaturalist-open-data.s3.amazonaws.com/photos/66887417/small.jpeg,N,Coprosma robusta,66887417.jpeg,-36.79306,174.7335662841797,Auckland,Auckland,30.189919
+https://inaturalist-open-data.s3.amazonaws.com/photos/82117302/small.jpeg,N,Coprosma robusta,82117302.jpeg,-36.795,174.72360229492188,Auckland,Auckland,86.238159
+https://inaturalist-open-data.s3.amazonaws.com/photos/24977355/small.jpeg,N,Coprosma robusta,24977355.jpeg,-36.78411,174.70867919921875,Auckland,Auckland,7.466501
+https://inaturalist-open-data.s3.amazonaws.com/photos/25161937/small.jpeg,N,Coprosma robusta,25161937.jpeg,-36.79394,174.71441650390625,Auckland,Auckland,38.984478
