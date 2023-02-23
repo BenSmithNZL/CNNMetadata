@@ -176,6 +176,7 @@ experiment_info = {
         'hours_elapsed',
         'days_elapsed',
         'num_of_obs',
+        'num_of_classes',
         'starting_fold'],
 
     'value': [
@@ -186,6 +187,7 @@ experiment_info = {
         (end_time - start_time).total_seconds() / 3600,
         (end_time - start_time).total_seconds() / 86400,
         len(metadata_df),
+        NUM_OF_CLASSES,
         config.STARTING_FOLD]
 }
 
